@@ -1,18 +1,32 @@
 package core;
-//By Carlos Hernandez
+
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
-import io.restassured.specification.RequestSpecification;
+import io.restassured.response.Response;
 
+/**
+ * This class provides a simple, reusable API client using RestAssured to perform HTTP operations such as GET, POST, PUT, PATCH, and DELETE.
+ * Here we set the base URL "https://jsonplaceholder.typicode.com" and include methods to send requests.
+ * */
 public class ApiClient {
+    private static final String BASE_URL = "https://jsonplaceholder.typicode.com";
 
-    //This method prepares a basic configuration for making API requests with RestAssured:
-    private static final String BASE_URL = "https://jsonplaceholder.typicode.com"; //Setting base URL for the API setting the content type as JSON
+    public static Response get(String endpoint) {
+        return RestAssured.given().baseUri(BASE_URL).get(endpoint);
+    }
 
-    public static RequestSpecification getRequestSpecification() {
-        return RestAssured.given()
-                .baseUri(BASE_URL)
-                .contentType(ContentType.JSON)
-                .log().all();
+    public static Response post(String endpoint, Object body) {
+        return RestAssured.given().baseUri(BASE_URL).contentType("application/json").body(body).post(endpoint);
+    }
+
+    public static Response put(String endpoint, Object body) {
+        return RestAssured.given().baseUri(BASE_URL).contentType("application/json").body(body).put(endpoint);
+    }
+
+    public static Response patch(String endpoint, Object body) {
+        return RestAssured.given().baseUri(BASE_URL).contentType("application/json").body(body).patch(endpoint);
+    }
+
+    public static Response delete(String endpoint) {
+        return RestAssured.given().baseUri(BASE_URL).delete(endpoint);
     }
 }
