@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="RestServiceTestSuite" parallel="methods" thread-count="5">
+    <test name="PostsTests">
+        <classes>
+            <class name="tests.PostsTests"/>
+        </classes>
+    </test>
+    <test name="CommentsTests">
+        <classes>
+            <class name="tests.CommentsTests"/>
+        </classes>
+    </test>
+</suite>
