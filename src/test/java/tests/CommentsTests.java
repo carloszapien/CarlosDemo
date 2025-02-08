@@ -52,7 +52,7 @@ public class CommentsTests {
 
     @Test
     public void testUnsupportedContentType() {
-        // Create a plain text payload
+        
         String plainTextPayload = "This is a plain text payload";
 
         // Send a POST request with an unsupported Content-Type
@@ -62,8 +62,6 @@ public class CommentsTests {
                 .body(plainTextPayload) // Send plain text instead of a Java object
                 .post("/posts");
 
-        // Validate the response status code
-        // JSONPlaceholder may not enforce content type validation, so it might return 201 instead of 415
         if (response.getStatusCode() == 415) {
             Assert.assertEquals(response.getStatusCode(), 415, "Expected status code 415 for unsupported Content-Type");
         } else {
