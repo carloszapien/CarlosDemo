@@ -15,4 +15,9 @@ This project is a test suite for testing the REST API provided by [JSONPlacehold
 ## Running the Tests
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repo/rest-api-tests.git
+   git clone https://github.com/carloszapien/CarlosDemo.git
+
+Run the tests using Maven:
+ mvn test
+To run tests in parallel, use the testng.xml file:
+ mvn test -DsuiteXmlFile=src/test/resources/testng.xml
