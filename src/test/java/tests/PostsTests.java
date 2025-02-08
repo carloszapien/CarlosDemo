@@ -97,8 +97,6 @@ public class PostsTests {
 
         // Validate the response status code
         Assert.assertEquals(response.getStatusCode(), 201, "Expected status code 201 for invalid data types");
-
-        // Validate that the response contains the expected fields
         Assert.assertNotNull(response.jsonPath().getString("id"), "ID should not be null");
         Assert.assertNotNull(response.jsonPath().getString("title"), "Title should not be null");
         Assert.assertNotNull(response.jsonPath().getString("body"), "Body should not be null");
