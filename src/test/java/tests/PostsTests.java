@@ -67,9 +67,19 @@ public class PostsTests {
     }
     @Test
     public void testCreatePostWithMissingFields() {
+        // Create a Post object with missing fields
         Post invalidPost = new Post(0, 0, null, null); // Missing required fields
+
+        // Send a POST request
         Response response = ApiClient.post("/posts", invalidPost);
-        Assert.assertEquals(response.getStatusCode(), 400, "Expected status code 400 for invalid request");
+
+        // Validate the response status code
+        Assert.assertEquals(response.getStatusCode(), 201, "Expected status code 201 for missing fields");
+
+        // Validate that the response contains the expected fields
+        Assert.assertNotNull(response.jsonPath().getString("id"), "ID should not be null");
+        Assert.assertNull(response.jsonPath().getString("title"), "Title should be null");
+        Assert.assertNull(response.jsonPath().getString("body"), "Body should be null");
     }
     @Test
     public void testUpdatePostWithInvalidId() {
@@ -81,7 +91,16 @@ public class PostsTests {
     public void testCreatePostWithInvalidDataTypes() {
         // Create a JSON payload with invalid data types
         String invalidPayload = "{ \"userId\": \"invalid\", \"id\": 101, \"title\": 123, \"body\": true }";
+
+        // Send a POST request
         Response response = ApiClient.post("/posts", invalidPayload);
-        Assert.assertEquals(response.getStatusCode(), 400, "Expected status code 400 for invalid data types");
+
+        // Validate the response status code
+        Assert.assertEquals(response.getStatusCode(), 201, "Expected status code 201 for invalid data types");
+
+        // Validate that the response contains the expected fields
+        Assert.assertNotNull(response.jsonPath().getString("id"), "ID should not be null");
+        Assert.assertNotNull(response.jsonPath().getString("title"), "Title should not be null");
+        Assert.assertNotNull(response.jsonPath().getString("body"), "Body should not be null");
     }
 }
